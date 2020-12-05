@@ -13,7 +13,3 @@ require('./database');
 app.listen(app.get('port'), () => {
     console.log("Server on port ", app.get('port'));
 });
-
-// https://www.youtube.com/watch?v=AknTRNvX9rA&list=PLo5lAe9kQrwqUEXK7oQbzv63KsdODzuAy&index=5&ab_channel=FaztCode
-
-// https://www.youtube.com/watch?v=w8fTsP7Swts&list=PLo5lAe9kQrwqUEXK7oQbzv63KsdODzuAy&index=7&ab_channel=FaztCode
