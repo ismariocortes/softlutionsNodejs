@@ -74,3 +74,5 @@ module.exports = app;
 //https://portal.azure.com/?quickstart=True#home
 //https://www.youtube.com/watch?v=8vPi6AeCLKQ&t=660s&ab_channel=FaztCode
 
+// Url de la app
+// https://softlutions.azurewebsites.net/
