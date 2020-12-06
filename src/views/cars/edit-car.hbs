@@ -1,0 +1,24 @@
+<h1 class="section-title">Edit car</h1>
+<div class="col-md-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <form action="/cars/edit/{{car._id}}?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+               <input type="text" name="car_brand" id="" class="form-control" value="{{car.brand}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="car_model" id="" class="form-control" value="{{car.model}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="car_color" id="" class="form-control" value="{{car.color}}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

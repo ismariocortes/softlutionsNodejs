@@ -1,0 +1,23 @@
+<h1 class="section-title">New car</h1>
+<div class="col-md-4 mx-auto">
+    <div class="card text-center">
+        <div class="card-header">            
+        </div>
+        <div class="card-body">
+            <form action="/cars/new-car" method="POST">
+                <div class="form-group">
+                    <input type="text" name="car_brand" id="" class="form-control" placeholder="brand" autofocus value="{{car_brand}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="car_model" id="" class="form-control" placeholder="model" value="{{car_model}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="car_color" id="" class="form-control" placeholder="color" value="{{car_color}}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Save</button>
+                </div>
+            </form>      
+        </div>
+    </div>
+</div>
