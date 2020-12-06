@@ -1,3 +1,10 @@
+/* 
+    Created on : 5 dec 2020
+    Author     : Mario Cortés
+    Master     : Dirección y Gestión de Proyectos Web
+    Asignatura : Ingeniería y Desarrollo en la Web
+*/
+
 const notesCtrlr = {};
 
 const User = require('../models/user');
@@ -66,12 +73,6 @@ notesCtrlr.renderEditForm = async (req, res) => {
 
 // Método que actualiza la información del usuario
 notesCtrlr.updateUser = async (req, res) => {
-    // const{
-    //     user_name, 
-    //     user_tel,
-    //     user_mail,
-    //     user_pass
-    // } = req.body;
     await User.findByIdAndUpdate(
         req.params.id,
         {

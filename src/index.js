@@ -1,5 +1,11 @@
+/* 
+    Created on : 5 dec 2020
+    Author     : Mario Cortés
+    Master     : Dirección y Gestión de Proyectos Web
+    Asignatura : Ingeniería y Desarrollo en la Web
+*/
 
-// Accede al archivo con extensión .env que contiene variables de entorno
+// Accede al archivo (en caso de existir) con extensión .env que contiene variables de entorno
 require('dotenv').config();
 
 // Usa el archivo server.js que contiene el módulo express

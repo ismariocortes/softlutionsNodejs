@@ -1,3 +1,10 @@
+/* 
+    Created on : 5 dec 2020
+    Author     : Mario Cortés
+    Master     : Dirección y Gestión de Proyectos Web
+    Asignatura : Ingeniería y Desarrollo en la Web
+*/
+
 /* Módulos ****************************************************************** */
 // Express
 const express = require('express');
@@ -11,7 +18,7 @@ const path = require('path');
 // Para ver las peticiones que llegan al servidor
 const morgan = require('morgan');
 
-// Sobre escribe el verbo POST con los verbos DELETE y/o PUT para usarlos en los formularios
+// Sobreescribe el verbo POST con los verbos DELETE y/o PUT para usarlos en los formularios
 const methodOverride = require('method-override');
 
 // Módulos para enviar mensajes entre las páginas del sitio
@@ -64,16 +71,3 @@ app.use(require('./routes/cars.routes'));
 app.use(express.static(path.join(__dirname,'public')));
 
 module.exports = app;
-
-//https://www.youtube.com/watch?v=PQL_iwLKnRg&list=PLo5lAe9kQrwqUEXK7oQbzv63KsdODzuAy&index=14&ab_channel=FaztCode
-
-//https://account.mongodb.com/account/login?signedOut=true
-
-//https://zellwk.com/blog/crud-express-mongodb/
-
-// Servidor público
-//https://portal.azure.com/?quickstart=True#home
-//https://www.youtube.com/watch?v=8vPi6AeCLKQ&t=660s&ab_channel=FaztCode
-
-// Url de la app
-// https://softlutions.azurewebsites.net/
