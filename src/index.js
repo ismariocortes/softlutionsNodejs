@@ -6,7 +6,7 @@
 */
 
 // Accede al archivo (en caso de existir) con extensión .env que contiene variables de entorno
-require('dotenv').config();
+/* require('dotenv').config(); */
 
 // Usa el archivo server.js que contiene el módulo express
 const app = require('./server');
