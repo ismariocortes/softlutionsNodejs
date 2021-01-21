@@ -1,0 +1,23 @@
+<h1 class="section-title">Nueva película</h1>
+<div class="col-md-4 mx-auto">
+    <div class="card text-center">
+        <div class="card-header">            
+        </div>
+        <div class="card-body">
+            <form action="/movies/new-movie" method="POST">
+                <div class="form-group">
+                    <input type="text" name="title" id="" class="form-control" placeholder="título" autofocus value="{{title}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="director" id="" class="form-control" placeholder="director" value="{{director}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="year" id="" class="form-control" placeholder="año" value="{{year}}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Guardar</button>
+                </div>
+            </form>            
+        </div>
+    </div>
+</div>

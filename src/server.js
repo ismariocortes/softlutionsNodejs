@@ -54,6 +54,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(flash());
+app.use(express.json()); // Permite al servidor entender formato json
 
 /* Global variables ******************************************************* */
 // Se usan las variables creadas por el método flash
@@ -66,6 +67,7 @@ app.use((req, res, next)=>{
 app.use(require('./routes/index.routes'));
 app.use(require('./routes/users.routes'));
 app.use(require('./routes/cars.routes'));
+app.use(require('./routes/movies.routes'));
 
 /* Static files *********************************************************** */
 app.use(express.static(path.join(__dirname,'public')));
