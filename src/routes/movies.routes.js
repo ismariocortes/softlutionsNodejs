@@ -18,22 +18,24 @@ const {
     deleteMovie
 } = require('../controllers/movies.controller');
 
+const {isAuthenticated} = require('../helpers/auth');
+
 // New movie - Renderiza el formulario de una "Nueva película"
-router.get('/movies/add', renderMovieForm);
+router.get('/movies/add', isAuthenticated, renderMovieForm);
 
 // Invoca la función para guardar la nueva película
-router.post('/movies/new-movie', createNewMovie);
+router.post('/movies/new-movie', isAuthenticated, createNewMovie);
 
 // Get all movie - Obtiene todas las películas que existen en la bd
-router.get('/movies', renderMovies);
+router.get('/movies', isAuthenticated, renderMovies);
 
 // Edit movie - Renderiza el formulario de edición de una película
-router.get('/movies/edit/:id', renderEditForm);
+router.get('/movies/edit/:id', isAuthenticated, renderEditForm);
 
 // Actualiza la información de una película en particular
-router.put('/movies/edit/:id', updateMovie);
+router.put('/movies/edit/:id', isAuthenticated, updateMovie);
 
 // Delete movie - Elimina una película en particular
-router.delete('/movies/delete/:id', deleteMovie);
+router.delete('/movies/delete/:id', isAuthenticated, deleteMovie);
 
 module.exports = router;

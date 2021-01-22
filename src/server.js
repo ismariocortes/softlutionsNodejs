@@ -25,9 +25,13 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 
+// Módulo para el logueo y la sesión
+const passport = require('passport');
+
 
 /* Initiazlizations *********************************************************** */
 const app = express(); 
+require('./config/passport');
 
 
 /* Settings ******************************************************************* */
@@ -53,13 +57,18 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 app.use(express.json()); // Permite al servidor entender formato json
+
 
 /* Global variables ******************************************************* */
 // Se usan las variables creadas por el método flash
 app.use((req, res, next)=>{
     res.locals.success_msg = req.flash('success_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 

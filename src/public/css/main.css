@@ -12,3 +12,11 @@ body{
 .section-title{
     color: white;
 }
+
+.logo{
+    width: 40%;
+}
+
+.text-login{
+    text-align: center;
+}

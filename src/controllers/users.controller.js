@@ -5,17 +5,70 @@
     Asignatura : Ingeniería y Desarrollo en la Web
 */
 
-const notesCtrlr = {};
+const usersCtrlr = {};
+
+const passport = require('passport');
 
 const User = require('../models/user');
 
+usersCtrlr.renderSignUpForm = (req, res) => {
+    res.render('users/signup');
+}
+
+usersCtrlr.signup = async (req, res) => {
+    const errors = [];
+    const { name, telephone, email, password, confirm_password } = req.body;
+    if (password != confirm_password) {
+        errors.push({ text: "Las contraseñas no coinciden." });
+    }
+    if (password.length < 4) {
+        errors.push({ text: "La contraseña es demasiado corta." });
+    }
+    if(errors.length > 0){
+        res.render('users/signup', {errors, telephone, name, email});
+    }else{
+        const emailUser = await User.findOne({mail: email});
+        if(emailUser){
+            errors.push({ text: "El correo ya se encuentra registrado." });
+            res.render('users/signup', {errors, telephone, name, email});
+        }else{
+            const newUser = new User({
+                name: name,
+                telephone: telephone,
+                mail: email,
+                password: password
+            });
+            newUser.password = await newUser.encryptPassword(password);
+            await newUser.save();
+            req.flash('success_msg', 'Registro correcto');
+            res.redirect('/users/login');
+        }
+    }
+}
+
+usersCtrlr.renderLoginForm = (req, res) => {
+    res.render('users/login');
+}
+
+usersCtrlr.login = passport.authenticate('local', {
+    failureRedirect: '/users/login',
+    successRedirect: '/cars',
+    failureFlash: true
+});
+
+usersCtrlr.logout = (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'Sesión cerrada correctamente.');
+    res.redirect('/users/login');
+}
+
 // Método que renderiza el formulario de captura de nuevo usuario
-notesCtrlr.renderUserForm = (req, res) => {
+usersCtrlr.renderUserForm = (req, res) => {
     res.render('users/new-user');
 }
 
 // Método que realiza el guardado del nuevo usuario
-notesCtrlr.createNewUser = async (req, res) => {
+usersCtrlr.createNewUser = async (req, res) => {
     console.log(req.body);
     const {
         user_name,
@@ -37,7 +90,7 @@ notesCtrlr.createNewUser = async (req, res) => {
         errors.push({ text: 'Cannt be empty fields' });
     }
     if (errors.length > 0) {
-        res.render('users/new-user', { 
+        res.render('users/new-user', {
             errors,
             user_name,
             user_tel,
@@ -59,20 +112,20 @@ notesCtrlr.createNewUser = async (req, res) => {
 }
 
 // Método que lista todos los usuarios guardados en la bd
-notesCtrlr.renderUsers = async (req, res) => {
+usersCtrlr.renderUsers = async (req, res) => {
     const users = await User.find().lean();
     res.render('users/all-users', { users });
 }
 
 // Método que renderiza el formulario de edición del usuario
-notesCtrlr.renderEditForm = async (req, res) => {
+usersCtrlr.renderEditForm = async (req, res) => {
     const user = await User.findById(req.params.id).lean();
     console.log(user);
     res.render('users/edit-user', { user });
 }
 
 // Método que actualiza la información del usuario
-notesCtrlr.updateUser = async (req, res) => {
+usersCtrlr.updateUser = async (req, res) => {
     await User.findByIdAndUpdate(
         req.params.id,
         {
@@ -85,10 +138,10 @@ notesCtrlr.updateUser = async (req, res) => {
 }
 
 // Método que elimina un usuario en específico
-notesCtrlr.deleteUser = async (req, res) => {
+usersCtrlr.deleteUser = async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'User deleted succesfully');
     res.redirect('/users');
 }
 
-module.exports = notesCtrlr;
+module.exports = usersCtrlr;
