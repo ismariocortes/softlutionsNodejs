@@ -7,7 +7,7 @@
 
 const { Schema, model } = require("mongoose");
 
-// Se define la estructura de la tabla User
+// Se define la estructura de la tabla movies
 const MovieSchema = new Schema({
     title: { type: String, required: true },
     director: { type: String, required: true },

@@ -1,5 +1,6 @@
 /* 
     Created on : 5 dec 2020
+    Modified on : 20 jan 2021
     Author     : Mario Cortés
     Master     : Dirección y Gestión de Proyectos Web
     Asignatura : Ingeniería y Desarrollo en la Web
@@ -7,20 +8,18 @@
     https://www.youtube.com/watch?v=EcCIlxfxc4g&t=430s&ab_channel=PractiDev
     https://www.youtube.com/watch?v=w8It1NHeGps&ab_channel=CarlosAzaustre
 */
-/* https://www.youtube.com/watch?v=EcCIlxfxc4g&ab_channel=PractiDev */
-/* https://www.youtube.com/watch?v=TAI68Zlseq8&ab_channel=CarlosAzaustre */
-/* https://www.youtube.com/watch?v=lV7mxivGX_I&ab_channel=FaztCode */
+
 
 const usersCtrlr = {};
-
 const passport = require('passport');
-
 const User = require('../models/user');
 
+/* Renderiza el formulario de registro */
 usersCtrlr.renderSignUpForm = (req, res) => {
     res.render('users/signup');
 }
 
+/* Realiza el registro del usuario */
 usersCtrlr.signup = async (req, res) => {
     const errors = [];
     const { name, telephone, email, password, confirm_password } = req.body;
@@ -52,17 +51,12 @@ usersCtrlr.signup = async (req, res) => {
     }
 }
 
+/* Renderiza el formulario de Logueo */
 usersCtrlr.renderLoginForm = (req, res) => {
     res.render('users/login');
 }
 
-/* usersCtrlr.login = passport.authenticate('local', {
-    failureRedirect: '/users/login',
-    successRedirect: '/cars',
-    failureFlash: true
-}); */
-
-
+/* Cierra la sesión del usuario */
 usersCtrlr.logout = (req, res) => {
     req.logout();
     req.flash('success_msg', 'Sesión cerrada correctamente.');

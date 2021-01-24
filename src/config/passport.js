@@ -1,3 +1,10 @@
+/* 
+    Created on : 21 jan 2021
+    Author     : Mario Cortés
+    Master     : Dirección y Gestión de Proyectos Web
+    Asignatura : Ingeniería y Desarrollo en la Web
+*/
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');

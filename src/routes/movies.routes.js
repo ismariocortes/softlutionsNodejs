@@ -18,6 +18,7 @@ const {
     deleteMovie
 } = require('../controllers/movies.controller');
 
+/* Valida si el usuario está logueado */
 const {isAuthenticated} = require('../helpers/auth');
 
 // New movie - Renderiza el formulario de una "Nueva película"

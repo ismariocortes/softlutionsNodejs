@@ -1,5 +1,6 @@
 /* 
     Created on : 5 dec 2020
+    Modified on : 20 jan 2021
     Author     : Mario Cortés
     Master     : Dirección y Gestión de Proyectos Web
     Asignatura : Ingeniería y Desarrollo en la Web
@@ -31,6 +32,7 @@ UserSchema.methods.matchPassword = async function(password) {
     return await bcrypt.compare(password,this.password);
 }
 
+// Genera el token único de la sesión de usuario
 UserSchema.methods.generateAuthToken = async function() {
     // Generate an auth token for the user
     const user = this;
