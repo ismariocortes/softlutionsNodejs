@@ -1,11 +1,14 @@
 const helpers = {};
 
 helpers.isAuthenticated = (req, res, next) => {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {        
         return next();
-    }else{
+    } else {
         res.redirect('/users/login');
     }
 }
 
 module.exports = helpers;
+
+
+

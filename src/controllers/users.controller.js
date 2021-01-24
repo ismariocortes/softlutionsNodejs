@@ -3,7 +3,13 @@
     Author     : Mario Cortés
     Master     : Dirección y Gestión de Proyectos Web
     Asignatura : Ingeniería y Desarrollo en la Web
+    https://www.youtube.com/watch?v=UExhqZBEPQg&t=309s&ab_channel=truecodex
+    https://www.youtube.com/watch?v=EcCIlxfxc4g&t=430s&ab_channel=PractiDev
+    https://www.youtube.com/watch?v=w8It1NHeGps&ab_channel=CarlosAzaustre
 */
+/* https://www.youtube.com/watch?v=EcCIlxfxc4g&ab_channel=PractiDev */
+/* https://www.youtube.com/watch?v=TAI68Zlseq8&ab_channel=CarlosAzaustre */
+/* https://www.youtube.com/watch?v=lV7mxivGX_I&ab_channel=FaztCode */
 
 const usersCtrlr = {};
 
@@ -50,11 +56,12 @@ usersCtrlr.renderLoginForm = (req, res) => {
     res.render('users/login');
 }
 
-usersCtrlr.login = passport.authenticate('local', {
+/* usersCtrlr.login = passport.authenticate('local', {
     failureRedirect: '/users/login',
     successRedirect: '/cars',
     failureFlash: true
-});
+}); */
+
 
 usersCtrlr.logout = (req, res) => {
     req.logout();

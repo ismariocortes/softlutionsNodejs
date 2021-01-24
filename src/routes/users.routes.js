@@ -5,25 +5,27 @@
     Asignatura : Ingeniería y Desarrollo en la Web
 */
 
-const {Router} =  require('express');
+const { Router } = require('express');
 const router = Router();
+const passport = require('passport');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 // Se requieren los métodos del controlador de usuarios
 const {
     renderSignUpForm,
     signup,
     renderLoginForm,
-    login,
-    logout,    
-    renderUserForm, 
-    createNewUser, 
-    renderUsers, 
-    renderEditForm, 
-    updateUser, 
+    logout,
+    renderUserForm,
+    createNewUser,
+    renderUsers,
+    renderEditForm,
+    updateUser,
     deleteUser
 } = require('../controllers/users.controller');
 
-const {isAuthenticated} = require('../helpers/auth');
+const { isAuthenticated } = require('../helpers/auth');
 
 router.get('/users/signup', renderSignUpForm);
 
@@ -31,7 +33,43 @@ router.post('/users/signup', signup);
 
 router.get('/users/login', renderLoginForm);
 
-router.post('/users/login', login);
+/* router.post('/users/login', login); */
+router.post('/users/login', function (req, res, next) {
+    passport.authenticate('local', async (err, user, info) => {
+        if (err) { return next(err); }
+
+        if (!user) {
+            req.flash('error', info.message);
+            res.redirect('/users/login');
+        }
+
+        /* const payload = {
+            id: user._id,
+            email: user.mail
+        };
+
+        const options = {
+            expiresIn: 86400
+        };
+
+        const token = jwt.sign(payload, 'secret123', options); */
+        const token = await user.generateAuthToken();
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                /* res.send({ token }); */
+                req.user = user;
+                console.log({ token });
+                
+                req.flash('success_msg', 'Acceso correcto');
+                return res.redirect('/cars');                
+            }
+
+        })
+    })(req, res, next)
+})
+
 
 router.get('/users/logout', logout);
 

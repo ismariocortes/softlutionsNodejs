@@ -8,6 +8,7 @@
 const moviesCtrlr = {};
 
 const Movie = require('../models/movies');
+const User = require('../models/user');
 const fetch = require('node-fetch');
 
 // Método que renderiza el formulario de captura de nueva película
@@ -41,10 +42,12 @@ moviesCtrlr.createNewMovie = async (req, res) => {
             year
         });
     } else {
+
         await fetch("https://apirest-movies.herokuapp.com/api/movies", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': req.user.token
             },
             body: JSON.stringify({
                 title: title,
@@ -52,6 +55,7 @@ moviesCtrlr.createNewMovie = async (req, res) => {
                 year: year
             })
         });
+
         req.flash('success_msg', 'Movie added succesfully');
         res.redirect('/movies');
     }
@@ -59,11 +63,24 @@ moviesCtrlr.createNewMovie = async (req, res) => {
 
 // Método que lista todas las película guardadoas en la bd
 moviesCtrlr.renderMovies = async (req, res) => {
-    /* const movies = await Movie.find().lean(); */
-    const response = await fetch('https://apirest-movies.herokuapp.com/api/movies');
+    /* const response = await fetch('https://apirest-movies.herokuapp.com/api/movies'); */
+    const response = await fetch('https://apirest-movies.herokuapp.com/api/movies', {
+        method: 'GET',
+        headers: {
+            'Authorization': req.user.token
+        }
+    });
     const movies = await response.json();
-    console.log(movies);
-    res.render('movies/all-movies', { movies });
+    /* console.log(await response.error); */
+    if (movies.error) {
+        req.logout();
+        res.redirect('/users/login');
+        console.log(movies.error);
+    } else {
+        res.render('movies/all-movies', { movies });
+    }
+    /* console.log(response); */
+
 }
 
 // Método que renderiza el formulario de edición de la película
@@ -78,7 +95,8 @@ moviesCtrlr.updateMovie = async (req, res) => {
     await fetch("https://apirest-movies.herokuapp.com/api/movies/" + req.params.id, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': req.user.token
         },
         body: JSON.stringify({
             title: req.body.title,
@@ -93,7 +111,12 @@ moviesCtrlr.updateMovie = async (req, res) => {
 // Método que elimina una película en específico
 moviesCtrlr.deleteMovie = async (req, res) => {
     /* await Movie.findByIdAndDelete(req.params.id); */
-    await fetch('https://apirest-movies.herokuapp.com/api/movies/' + req.params.id, { method: 'DELETE' });
+    await fetch('https://apirest-movies.herokuapp.com/api/movies/' + req.params.id, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': req.user.token
+        }
+    });
     req.flash('success_msg', 'Movie deleted succesfully');
     res.redirect('/movies');
 }
