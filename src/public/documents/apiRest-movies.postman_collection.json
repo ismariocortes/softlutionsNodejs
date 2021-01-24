@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "286cb1a5-c670-4fce-8ff7-f514c701744c",
+		"name": "apiRest-movies",
+		"description": "Peticiones a la api rest de películas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login ApiRest",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mario@correo.com\",\r\n    \"password\": \"12345\"\r\n}"
+				},
+				"url": {
+					"raw": "https://softlutions.herokuapp.com/users/login/apirest",
+					"protocol": "https",
+					"host": [
+						"softlutions",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"login",
+						"apirest"
+					]
+				},
+				"description": "Log a user in"
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://apirest-movies.herokuapp.com/api/movies/",
+					"protocol": "https",
+					"host": [
+						"apirest-movies",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"movies",
+						""
+					]
+				},
+				"description": "Get all movies en database"
+			},
+			"response": []
+		},
+		{
+			"name": "newMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Infinity Wars\",\r\n    \"director\": \"QuickSilver\",\r\n    \"year\": \"2018\"\r\n}"
+				},
+				"url": {
+					"raw": "https://apirest-movies.herokuapp.com/api/movies/",
+					"protocol": "https",
+					"host": [
+						"apirest-movies",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"movies",
+						""
+					]
+				},
+				"description": "Get all movies en database"
+			},
+			"response": []
+		},
+		{
+			"name": "updateMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Infinity Wars\",\r\n    \"director\": \"QuickSilver\",\r\n    \"year\": \"2018\"\r\n}"
+				},
+				"url": {
+					"raw": "https://apirest-movies.herokuapp.com/api/movies/600cf3b3eb14d50015425a41",
+					"protocol": "https",
+					"host": [
+						"apirest-movies",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"movies",
+						"600cf3b3eb14d50015425a41"
+					]
+				},
+				"description": "Get all movies en database"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://apirest-movies.herokuapp.com/api/movies/600cf3b3eb14d50015425a41",
+					"protocol": "https",
+					"host": [
+						"apirest-movies",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"movies",
+						"600cf3b3eb14d50015425a41"
+					]
+				},
+				"description": "Get all movies en database"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBiMThiMzQxOWYxMTM0MmMzN2U1OTQiLCJpYXQiOjE2MTE0MzkxNDd9.LYfvi0hYauZDQxJy0po-BbLXLt8K_T7MqdXD19-VHFQ",
+				"type": "string"
+			}
+		]
+	}
+}
